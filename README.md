@@ -13,7 +13,7 @@ Hardware-level power and profile management automation for Asus Vivobook Pro 14X
 ## 🛠️ Installation & Uninstallation
 
 ### Installation
-git clone https://github.com/YOUR_USERNAME/AsusPowerMaster.git
+git clone https://github.com/zuhtuEren/AsusPowerMaster.git
 cd AsusPowerMaster
 sudo bash install.sh
 
