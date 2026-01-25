@@ -1,0 +1,13 @@
+[Unit]
+Description=Asus Power Master Smart Monitor
+After=multi-user.target
+
+[Service]
+Type=simple
+# Servisin senin yazdığın scripti doğru parametreyle başlatmasını sağlıyoruz
+ExecStart=/usr/local/bin/asus-pwr --monitor
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
