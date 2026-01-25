@@ -68,20 +68,20 @@ case $1 in
         ;;
 
     -h|--help|*)
-        echo -e "\e[34mAsus Power Master v2.6 - Kullanım Kılavuzu\e[0m"
+        echo -e "\e[34mAsus Power Master v2.6 - Usage Guide\e[0m"
         echo "-------------------------------------------------------"
-        echo -e "\e[1mTEMEL KOMUTLAR:\e[0m"
-        echo "  -s, --status              Dashboard'u göster"
-        echo "  -b, --battery [60-100]    Şarj limitini ayarlar (-p ile kalıcı)"
-        echo "  -t, --turbo [on/off]      Turbo Boost'u ayarlar (-p ile kalıcı)"
-        echo "  -f, --fan [0|1|2]         Fan Modu (0:Bal, 1:Turbo, 2:Sil)"
-        echo "  -k, --keyboard [0-3]      Klavye ışık seviyesi"
+        echo -e "\e[1mCORE COMMANDS:\e[0m"
+        echo "  -s, --status              Show dashboard"
+        echo "  -b, --battery [60-100]    Set charge limit (-p for persistence)"
+        echo "  -t, --turbo [on/off]      Toggle Turbo Boost (-p for persistence)"
+        echo "  -f, --fan [0|1|2]         Set Fan Mode (0:Bal, 1:Turbo, 2:Sil)"
+        echo "  -k, --keyboard [0-3]      Set Backlight level"
         echo ""
-        echo -e "\e[1mPROFİL YÖNETİMİ (Monitor Modu İçin):\e[0m"
-        echo "  --set-ac [options]        Priz modunu özelleştir"
-        echo "  --set-bat [options]       Pil modunu özelleştir"
-        echo "  --monitor [-k val]        Akıllı gözcüyü başlat"
+        echo -e "\e[1mPROFILE MANAGEMENT (For Watchdog):\e[0m"
+        echo "  --set-ac [options]        Customize AC profile"
+        echo "  --set-bat [options]       Customize Battery profile"
+        echo "  --monitor [-k val]        Start smart watchdog"
         echo ""
-        echo -e "\e[1mÖRNEK:\e[0m sudo asus-pwr --set-bat -f 0 -t off"
+        echo -e "\e[1mEXAMPLE:\e[0m sudo asus-pwr --set-bat -f 0 -t off"
         ;;
 esac
