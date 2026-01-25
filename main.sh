@@ -15,11 +15,13 @@ done
 
 monitor_ac_status() {
     local kbd_pref="$1"
-    echo -e "\e[34m[INFO]\e[0m Smart Watchdog started. Universal paths detected."
-    local last_status=$(get_ac_status)
-    apply_auto_profile "$kbd_pref"
-    
+    echo -e "\e[34m[INFO]\e[0m Smart Watchdog started."
+    local last_status=""
+
     while true; do
+        # HER DÖNGÜDE DOSYAYI YENİDEN OKU
+        [ -f "/etc/asus-power.conf" ] && source "/etc/asus-power.conf"
+        
         local current_status=$(get_ac_status)
         if [ "$current_status" != "$last_status" ]; then
             apply_auto_profile "$kbd_pref"
@@ -39,7 +41,8 @@ case $1 in
     -k|--keyboard) set_kbd_brightness "$2" ;;
     
     --set-ac|--set-bat)
-        profile_type=$(echo "$1" | cut -d'-' -f3 | tr '[:lower:]' '[:upper:]')
+        # Daha güvenli profil tespiti
+        if [[ "$1" == "--set-ac" ]]; then profile_type="AC"; else profile_type="BAT"; fi
         shift
         while [[ "$#" -gt 0 ]]; do
             case $1 in
