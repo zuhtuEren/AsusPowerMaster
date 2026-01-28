@@ -1,6 +1,7 @@
 #!/bin/bash
-# persistence.sh - Unified naming
+# lib/persistence.sh - Ayar Kaydetme ve Servis Yönetimi
 
+# Verilen ayarı /etc/asus-power.conf dosyasına yazar veya günceller
 save_setting() {
     local key=$1; local val=$2
     [ ! -f "/etc/asus-power.conf" ] && sudo touch "/etc/asus-power.conf"
@@ -11,8 +12,8 @@ save_setting() {
     fi
 }
 
+# Bilgisayar açıldığında ayarların otomatik uygulanması için systemd servisi oluşturur
 enable_persistence() {
-    # Ismi asus-pwr-persistence.service yapalım ki ana servisle karışmasın
     local SERVICE_FILE="/etc/systemd/system/asus-pwr-persistence.service"
     if [ ! -f "$SERVICE_FILE" ]; then
         sudo tee "$SERVICE_FILE" > /dev/null <<EOF

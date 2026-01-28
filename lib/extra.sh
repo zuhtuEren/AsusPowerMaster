@@ -1,19 +1,19 @@
 #!/bin/bash
-# lib/extra.sh - Hardware Path Discovery Module
+# lib/extra.sh - Donanım Yolu Keşif Modülü
 
-# --- GLOBAL PATH DISCOVERY ---
+# Sistemdeki klavye ışığı, batarya ve fan kontrol yollarını otomatik bulur
 export KBD_PATH=$(find /sys/class/leds/ -name "*kbd_backlight" | head -n 1)
 export BAT_DIR=$(find /sys/class/power_supply/ -name "BAT*" | head -n 1)
 export AC_PATH=$(find /sys/class/power_supply/ -name "AC*" -o -name "ADP*" | head -n 1)
 export FAN_PATH=$(find /sys/devices/platform/ -name "throttle_thermal_policy" -o -name "fan_boost_mode" | head -n 1)
 export KBD_MAX_BRIGHTNESS=$( [ -f "$KBD_PATH/max_brightness" ] && cat "$KBD_PATH/max_brightness" || echo 3 )
 
-# Helper to check AC status (Returns 1 for AC, 0 for Battery)
+# AC adaptörün durumunu sorgular (1: Takılı, 0: Pilde)
 get_ac_status() {
     [ -f "$AC_PATH/online" ] && cat "$AC_PATH/online" || echo "1"
 }
 
-# Helper to calculate battery discharge/charge rate
+# Batarya tüketimini Watt cinsinden hesaplar
 get_wattage() {
     local watt_final="0.00"
     if [ -f "$BAT_DIR/power_now" ]; then
@@ -25,4 +25,3 @@ get_wattage() {
     fi
     echo "$watt_final"
 }
-
