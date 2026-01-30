@@ -74,9 +74,22 @@ case $1 in
     --apply)
         # Sistem açılışında kaydedilen ayarları uygular
         [ -f "/etc/asus-power.conf" ] && source "/etc/asus-power.conf"
+        
+        # Donanım yollarının hazır olduğundan emin olmak için bekleme döngüsü
+        # Sürücüler bazen boot sırasında birkaç saniye geç yüklenebilir
+        for i in {1..5}; do
+            source "$LIB_DIR/extra.sh"
+            [[ -n "$BAT_DIR" ]] && break
+            sleep 1
+        done
+
+        # Ayarlar tanımlanmışsa uygula
         [[ -n "$BATTERY_LIMIT" ]] && set_battery_limit "$BATTERY_LIMIT"
         [[ -n "$TURBO_BOOST" ]] && set_turbo_boost "$TURBO_BOOST"
         [[ -n "$FAN_MODE" ]] && set_fan_mode "$FAN_MODE"
+        
+        # Servisin 'Başarı' ile kapanması için çıkış kodunu sıfırla
+        exit 0
         ;;
 
     -h|--help|*)
